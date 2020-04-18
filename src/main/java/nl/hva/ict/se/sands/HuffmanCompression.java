@@ -6,55 +6,35 @@ import huffmanClasses.MinPQ;
 
 import java.awt.datatransfer.SystemFlavorMap;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class HuffmanCompression {
     private final String text;
     // alphabet size of extended ASCII
     private static final int R = 256;
     private Node root;
+    private char[] textCharacters;
     private final Map<Character, String> map;
     private int[] freq;
-
-    // Huffman trie node
-//    private static class Node implements Comparable<Node> {
-//        private final char ch;
-//        private final int freq;
-//        private final Node left, right;
-//
-//        Node(char ch, int freq, Node left, Node right) {
-//            this.ch    = ch;
-//            this.freq  = freq;
-//            this.left  = left;
-//            this.right = right;
-//        }
-//
-//        // is the node a leaf node?
-//        private boolean isLeaf() {
-//            assert ((left == null) && (right == null)) || ((left != null) && (right != null));
-//            return (left == null) && (right == null);
-//        }
-//
-//        // compare, based on frequency
-//        public int compareTo(Node that) {
-//            return this.freq - that.freq;
-//        }
-//    }
+    Map<Character, Integer> characterFreq = new HashMap<>();
 
     public HuffmanCompression(String text) {
         this.text = text;
+        textCharacters = this.text.toCharArray();
+
         map = new HashMap<>();
+
         compress();
     }
 
     public HuffmanCompression(InputStream input) {
         Scanner sc = new Scanner(input);
-        sc.useDelimiter("\\Z"); // EOF marker
+        sc.useDelimiter("\\Z");
+
         text = sc.next();
+        textCharacters = this.text.toCharArray();
         map = new HashMap<>();
+
         compress();
     }
 
@@ -73,48 +53,10 @@ public class HuffmanCompression {
      * @return
      */
     public String compress() {
-        // read the input
-        String s = BinaryStdIn.readString();
-        char[] input = s.toCharArray();
-
-        // tabulate frequency counts
-        freq = new int[R];
-        for (int i = 0; i < input.length; i++)
-            freq[input[i]]++;
-
         // build Huffman trie
-        root = buildTrie();
-//         build code table
-        String[] st = new String[R];
-        buildCode(st, root, "");
-        for (int i = 0; i < st.length; i++) {
-            if (st[i] != null) {
-                map.put((char) i, st[i]);
-            }
-        }
+        buildTrie();
+        buildCode();
 
-
-        // print trie for decoder
-        writeTrie(root);
-
-        // print number of bytes in original uncompressed message
-
-        BinaryStdOut.write(input.length);
-
-        // use Huffman code to encode input
-        for (int i = 0; i < input.length; i++) {
-            String code = st[input[i]];
-            for (int j = 0; j < code.length(); j++) {
-                if (code.charAt(j) == '0') {
-                    BinaryStdOut.write(false);
-                } else if (code.charAt(j) == '1') {
-                    BinaryStdOut.write(true);
-                } else throw new IllegalStateException("Illegal state");
-            }
-        }
-        String result = BinaryStdIn.readString();
-        // close output stream
-        BinaryStdOut.close();
 
         return result;
     }
@@ -125,8 +67,8 @@ public class HuffmanCompression {
         // initialze priority queue with singleton trees
         MinPQ<Node> pq = new MinPQ<>();
         for (char c = 0; c < R; c++)
-            if (freq[c] > 0)
-                pq.insert(new Node(freq[c], c));
+            if (characterFreq.get(c) != null)
+                pq.insert(new Node(characterFreq.get(c), c));
 
         // merge two smallest trees
         while (pq.size() > 1) {

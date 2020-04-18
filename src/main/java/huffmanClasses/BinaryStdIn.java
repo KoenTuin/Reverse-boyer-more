@@ -48,22 +48,35 @@ public final class BinaryStdIn {
 
     // fill buffer
     private static void initialize() {
+        System.out.println(" -- |Being initialized");
+
         in = new BufferedInputStream(System.in);
+        System.out.println(" --- |in reset");
+
         buffer = 0;
+        System.out.println(" --- |buffer reset");
+
         n = 0;
+        System.out.println(" --- |n reset");
+
+        System.out.println(" -- |Start to fill buffer");
         fillBuffer();
+        System.out.println(" -- |Buffer filled");
+
         isInitialized = true;
     }
 
     private static void fillBuffer() {
         try {
+            System.out.println("  --- |Try filling buffer");
             buffer = in.read();
             n = 8;
+            System.out.println("  --- |Buffer filled");
         }
         catch (IOException e) {
-            System.out.println("EOF");
             buffer = EOF;
             n = -1;
+            System.out.println("  --- |Failed to fill buffer");
         }
     }
 
@@ -71,7 +84,8 @@ public final class BinaryStdIn {
      * Close this input stream and release any associated system resources.
      */
     public static void close() {
-        if (!isInitialized) initialize();
+        if (!isInitialized)
+            initialize();
         try {
             in.close();
             isInitialized = false;
@@ -86,7 +100,12 @@ public final class BinaryStdIn {
      * @return true if and only if standard input is empty
      */
     public static boolean isEmpty() {
-        if (!isInitialized) initialize();
+        if (!isInitialized)
+            System.out.println("- |Not initialized yet");
+            System.out.println("- |Start of initialize");
+            initialize();
+            System.out.println("- |End of initialize");
+
         return buffer == EOF;
     }
 
@@ -166,13 +185,20 @@ public final class BinaryStdIn {
      *         available on standard input is not a multiple of 8 (byte-aligned)
      */
     public static String readString() {
-        if (isEmpty()) throw new NoSuchElementException("Reading from empty input stream");
+        if (isEmpty()){
+            System.out.println("String is Empty");
 
+            throw new NoSuchElementException("Reading from empty input stream");
+        }
+
+        System.out.println("String is not empty");
         StringBuilder sb = new StringBuilder();
         while (!isEmpty()) {
+            System.out.println("String is here");
             char c = readChar();
             sb.append(c);
         }
+        System.out.println("String is done");
         return sb.toString();
     }
 
