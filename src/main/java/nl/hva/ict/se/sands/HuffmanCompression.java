@@ -1,11 +1,7 @@
 package nl.hva.ict.se.sands;
 
-import huffmanClasses.BinaryStdIn;
-import huffmanClasses.BinaryStdOut;
-import huffmanClasses.MinPQ;
-
-import java.awt.datatransfer.SystemFlavorMap;
 import java.io.InputStream;
+<<<<<<< HEAD
 import java.util.*;
 
 public class HuffmanCompression {
@@ -25,6 +21,16 @@ public class HuffmanCompression {
         map = new HashMap<>();
 
         compress();
+=======
+import java.util.Map;
+import java.util.Scanner;
+
+public class HuffmanCompression {
+    private final String text;
+
+    public HuffmanCompression(String text) {
+        this.text = text;
+>>>>>>> parent of d0ed098... Progress
     }
 
     public HuffmanCompression(InputStream input) {
@@ -32,15 +38,17 @@ public class HuffmanCompression {
         sc.useDelimiter("\\Z");
 
         text = sc.next();
+<<<<<<< HEAD
         textCharacters = this.text.toCharArray();
         map = new HashMap<>();
 
         compress();
+=======
+>>>>>>> parent of d0ed098... Progress
     }
 
     /**
      * Returns the compression ratio assuming that every characters in the text uses 8 bits.
-     *
      * @return the compression ratio.
      */
     public double getCompressionRatio() {
@@ -49,10 +57,10 @@ public class HuffmanCompression {
 
     /**
      * Compresses the text that was provided to the constructor.
-     *
      * @return
      */
     public String compress() {
+<<<<<<< HEAD
         // build Huffman trie
         buildTrie();
         buildCode();
@@ -93,43 +101,27 @@ public class HuffmanCompression {
     }
 
 
+=======
+        return "";
+    }
+
+>>>>>>> parent of d0ed098... Progress
     /**
      * Returns the root of the compression tree.
-     *
      * @return the root of the compression tree.
      */
     Node getCompressionTree() {
-        return root;
+        return null;
     }
 
     /**
      * Returns a Map<Character, String> with the character and the code that is used to encode it.
      * For "aba" this would result in: ['b' -> "0", 'a' -> "1"]
      * And for "cacbcac" this would result in: ['b' -> "00", 'a' -> "01", 'c' -> "1"]
-     *
      * @return the Huffman codes
      */
     Map<Character, String> getCodes() {
-//        Map<Character, String> map = new HashMap<>();
-//
-//        String[] keyCount = new String[R];
-//        buildCode(keyCount, root, "");
-
-        return map;
-    }
-
-    // make a lookup table from symbols and their encodings
-    private static void buildCode(String[] st, Node x, String s) {
-//        if (x == null) {
-//            return;
-//        }
-
-        if (!x.isLeaf()) {
-            buildCode(st, x.getLeft(), s + '0');
-            buildCode(st, x.getRight(), s + '1');
-        } else {
-            st[x.getCharacter()] = s;
-        }
+        return null;
     }
 
 }

@@ -20,13 +20,9 @@ public class Node implements Comparable<Node> {
         this.right = right;
     }
 
-    public boolean isLeaf() {
-        return left == null && right == null;
-    }
-
     @Override
     public int compareTo(Node o) {
-        return this.weight - o.weight;
+        return 0;
     }
 
     public Node getLeft() {
