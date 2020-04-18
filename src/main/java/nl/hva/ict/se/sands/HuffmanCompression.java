@@ -1,14 +1,23 @@
 package nl.hva.ict.se.sands;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class HuffmanCompression {
     private final String text;
+    char[] textCharacters;
+    HashMap<Character, String> map;
+
 
     public HuffmanCompression(String text) {
         this.text = text;
+        textCharacters = this.text.toCharArray();
+
+         map = new HashMap<>();
+
+        compress();
     }
 
     public HuffmanCompression(InputStream input) {

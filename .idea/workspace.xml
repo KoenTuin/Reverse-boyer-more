@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a8187ac-a95f-4e5d-93a7-5cf901240889" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/huffmanClasses/BinaryStdIn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/huffmanClasses/BinaryStdOut.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/huffmanClasses/MinPQ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/huffmanClasses/StdIn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/huffmanClasses/StdOut.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +69,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="JUnit.HuffmanCompressionTest">
+  <component name="RunManager" selected="JUnit.BackwardsSearchTest">
     <configuration name="BackwardsSearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.BackwardsSearch" />
       <module name="SandS" />
@@ -139,8 +135,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HuffmanCompressionTest" />
         <item itemvalue="JUnit.BackwardsSearchTest" />
+        <item itemvalue="JUnit.HuffmanCompressionTest" />
         <item itemvalue="Application.ForwardsSearch" />
         <item itemvalue="Application.BackwardsSearch" />
         <item itemvalue="Application.ForwardsSearch (1)" />
@@ -222,10 +218,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="347" key="GridCell.Tab.1.right/1920.638.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1586464392052" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1587205098119">
+    <state x="575" y="109" key="SettingsEditor" timestamp="1587205570438">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587205098119" />
+    <state x="575" y="109" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587205570438" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
