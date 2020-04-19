@@ -42,11 +42,11 @@ public class HuffmanCompressionTest {
 
         assertEquals(0.125,compressor.getCompressionRatio(), 0.0001);
     }
-
-    @Test
-    public void checkIets(){
-
-        assertEquals();
-    }
+//
+//    @Test
+//    public void checkIets(){
+//
+//        assertEquals();
+//    }
 
 }

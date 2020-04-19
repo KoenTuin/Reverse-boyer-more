@@ -1,6 +1,5 @@
 package nl.hva.ict.se.sands;
 
-import huffmanClasses.BinaryStdIn;
 import huffmanClasses.BinaryStdOut;
 
 import java.io.InputStream;
@@ -18,7 +17,7 @@ public class HuffmanCompression {
     private final HashMap<Character, String> map;
     private final HashMap<Character, Integer> frequency = new HashMap<>();
     private char[] characters;
-    private int[] freq;
+    private StringBuilder bitOutput;
 
     public HuffmanCompression(String text) {
         this.text = text;
@@ -34,7 +33,6 @@ public class HuffmanCompression {
         characters = this.text.toCharArray();
         map = new HashMap<>();
         compress();
-
     }
 
     /**
@@ -79,6 +77,8 @@ public class HuffmanCompression {
             }
         }
 
+        bitOutput = new StringBuilder("");
+
 //        //ToDo build Huffman trie
         root = buildTrie();
 //
@@ -88,7 +88,9 @@ public class HuffmanCompression {
         // ToDo print trie for decoder
         writeTrie(root);
 
-        return null;
+        System.out.println("++++=+++++++++++++" + bitOutput.toString());
+
+        return bitOutput.toString();
     }
 
     private Node buildTrie() {
@@ -160,6 +162,7 @@ public class HuffmanCompression {
             buildCode(x.getRight(), s + '1');
         } else {
             map.put(x.getCharacter(), s);
+            bitOutput.append(s);
         }
         if (x.isLeaf()) {
             System.out.println(x.getCharacter() + " - " + s);
