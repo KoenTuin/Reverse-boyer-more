@@ -19,8 +19,6 @@ public class HuffmanCompression {
     private final HashMap<Character, Integer> frequency = new HashMap<>();
     private char[] characters;
     private int[] freq;
-    private StringBuilder bitOutput = new StringBuilder("");
-
 
     public HuffmanCompression(String text) {
         this.text = text;
@@ -41,36 +39,43 @@ public class HuffmanCompression {
 
     /**
      * Returns the compression ratio assuming that every characters in the text uses 8 bits.
+     *
      * @return the compression ratio.
      */
     public double getCompressionRatio() {
-        int totalOriginaText;
-        int totalCompressedText;
-        totalCompressedText = bitOutput.toString().length();
-        totalOriginaText = characters.length * 8;
-        System.out.println("bitOutput = " + bitOutput.toString());
-        System.out.println(totalCompressedText + " : " + totalOriginaText);
 
-        return 0.0;
+        double huffmanAmountBits = 0;
+        double normalAmountBits = 0;
+        double compressionRatio;
+
+        for (HashMap.Entry<Character, Integer> entry : frequency.entrySet()) {
+            huffmanAmountBits += entry.getValue().toString().length() * entry.getValue();
+            normalAmountBits += entry.getValue() * 8;
+        }
+
+        compressionRatio = huffmanAmountBits / normalAmountBits;
+
+        return compressionRatio;
     }
 
     /**
      * Compresses the text that was provided to the constructor.
+     *
      * @return
      */
     public String compress() {
-        // read the input
-        // compress -> text
+
         // text. each character count
         // if text.character doesnt exist in map create
         // if text.character exists increment
 
+        //read the input
         for (char c : characters) {
-            if(frequency.get(c) == null){
+            if (frequency.get(c) == null) {
                 frequency.put(c, 1);
-                map.put(c,  "");
-            }else{
-                frequency.put(c , frequency.get(c)+1);
+                map.put(c, "");
+            } else {
+                frequency.put(c, frequency.get(c) + 1);
             }
         }
 
@@ -80,29 +85,8 @@ public class HuffmanCompression {
 //        //ToDo build code table
         buildCode(getCompressionTree(), "");
 
-        // print trie for decoder
+        // ToDo print trie for decoder
         writeTrie(root);
-
-//        // print number of bytes in original uncompressed message
-//
-//        BinaryStdOut.write(input.length);
-//
-//        // use Huffman code to encode input
-//        for (int i = 0; i < input.length; i++) {
-//            String code = st[input[i]];
-//            for (int j = 0; j < code.length(); j++) {
-//                if (code.charAt(j) == '0') {
-//                    BinaryStdOut.write(false);
-//                } else if (code.charAt(j) == '1') {
-//                    BinaryStdOut.write(true);
-//                } else throw new IllegalStateException("Illegal state");
-//            }
-//        }
-//        System.out.println("reading");
-//        String result = BinaryStdIn.readString();
-//        System.out.println("Finished reading");
-//        // close output stream
-//        BinaryStdOut.close();
 
         return null;
     }
@@ -110,8 +94,8 @@ public class HuffmanCompression {
     private Node buildTrie() {
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        for (Map.Entry<Character, Integer> entry : frequency.entrySet()  ) {
-            if (entry.getValue() > 0 && entry.getKey() != null){
+        for (Map.Entry<Character, Integer> entry : frequency.entrySet()) {
+            if (entry.getValue() > 0 && entry.getKey() != null) {
                 pq.add(new Node(entry.getValue(), entry.getKey()));
             }
         }
@@ -121,14 +105,14 @@ public class HuffmanCompression {
         if (pq.size() == 1) {
             if (frequency.get('\0') == 0) {
                 pq.add(new Node(0, '\0'));
-            } else{
-                pq.add(new Node(0,'\1'));
+            } else {
+                pq.add(new Node(0, '\1'));
             }
         }
 
         // merge two smallest trees
         while (pq.size() > 1) {
-            Node left  = pq.poll();
+            Node left = pq.poll();
             Node right = pq.poll();
             Node parent = new Node(left, right);
             pq.add(parent);
@@ -149,17 +133,9 @@ public class HuffmanCompression {
         writeTrie(x.getRight());
     }
 
-        //        if (x.isLeaf()) {
-////            System.out.println("Bits: " + map.get(x));
-//            bitOutput += map.get(x);
-//            return;
-//        }
-//        writeTrie(x.getLeft());
-//        writeTrie(x.getRight());
-//        }
-
     /**
      * Returns the root of the compression tree.
+     *
      * @return the root of the compression tree.
      */
     Node getCompressionTree() {
@@ -170,6 +146,7 @@ public class HuffmanCompression {
      * Returns a Map<Character, String> with the character and the code that is used to encode it.
      * For "aba" this would result in: ['b' -> "0", 'a' -> "1"]
      * And for "cacbcac" this would result in: ['b' -> "00", 'a' -> "01", 'c' -> "1"]
+     *
      * @return the Huffman codes
      */
     Map<Character, String> getCodes() {
@@ -183,12 +160,9 @@ public class HuffmanCompression {
             buildCode(x.getRight(), s + '1');
         } else {
             map.put(x.getCharacter(), s);
-            bitOutput.append(s);
-//            bitOutput += s;
         }
         if (x.isLeaf()) {
-//            bitOutput += s;
-            System.out.println(x.getCharacter() + " - " + s +"BitOutput: "+ bitOutput);
+            System.out.println(x.getCharacter() + " - " + s);
 
         }
     }
