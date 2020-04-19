@@ -1,7 +1,5 @@
 package nl.hva.ict.se.sands;
 
-import huffmanClasses.BinaryStdOut;
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,10 +61,6 @@ public class HuffmanCompression {
      */
     public String compress() {
 
-        // text. each character count
-        // if text.character doesnt exist in map create
-        // if text.character exists increment
-
         //read the input
         for (char c : characters) {
             if (frequency.get(c) == null) {
@@ -79,16 +73,14 @@ public class HuffmanCompression {
 
         bitOutput = new StringBuilder("");
 
-//        //ToDo build Huffman trie
+        //build Huffman trie
         root = buildTrie();
-//
-//        //ToDo build code table
+
+        // build code table
         buildCode(getCompressionTree(), "");
 
-        // ToDo print trie for decoder
+        //print trie for decoder
         writeTrie(root);
-
-        System.out.println("++++=+++++++++++++" + bitOutput.toString());
 
         return bitOutput.toString();
     }
@@ -124,13 +116,9 @@ public class HuffmanCompression {
 
     // write bitstring-encoded trie to standard output
     private void writeTrie(Node x) {
-
         if (x.isLeaf()) {
-            BinaryStdOut.write(true);
-            BinaryStdOut.write(x.getCharacter(), 8);
             return;
         }
-        BinaryStdOut.write(false);
         writeTrie(x.getLeft());
         writeTrie(x.getRight());
     }

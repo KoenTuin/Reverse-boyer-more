@@ -42,11 +42,12 @@ public class HuffmanCompressionTest {
 
         assertEquals(0.125,compressor.getCompressionRatio(), 0.0001);
     }
-//
-//    @Test
-//    public void checkIets(){
-//
-//        assertEquals();
-//    }
+    @Test
+    public void checkCorrectRootWeight() {
+        // Add 22 characters to compressor that should mean the weight of the root is 22
+        compressor = new HuffmanCompression("uskengpeiurndmaoafnalf");
+
+        assertEquals(22,compressor.getCompressionTree().getWeight());
+    }
 
 }
